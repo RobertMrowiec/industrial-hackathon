@@ -1,3 +1,19 @@
-<Layout::Navbar />
+<div class="h-screen bg-gray-100">
+  <Layout::Navbar />
 
-<div>This is content</div>
+  <div class="flex items-center">
+    <div class="flex-1 w-full">
+      <div class="p-12">
+        <div class="relative">
+          <img class="w-full rounded-lg shadow-xl" src="/site-plan.jpg" alt="Site plan">
+
+          {{#each rooms as |room|}}
+            <Dashboard::Room @room={{room}} />
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <Layout::Sidebar @people={{this.people}} />
+  </div>
+</div>

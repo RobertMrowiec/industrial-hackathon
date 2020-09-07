@@ -11,3 +11,16 @@ body {
 }
 
 @tailwind utilities;
+
+.sidebar {
+  height: calc(100vh - 80px);
+}
+
+.room {
+  position: absolute;
+  z-index: 1000;
+}
+
+.room:hover {
+  background-color: rgba(215, 159, 26, 0.3);
+}
