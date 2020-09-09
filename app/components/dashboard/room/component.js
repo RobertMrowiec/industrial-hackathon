@@ -6,4 +6,14 @@ export default class DashboardRoomComponent extends Component {
 
     return `top: ${top}; left: ${left}; right: ${right}; bottom: ${bottom};`;
   }
+
+  get countPeopleInRoom() {
+    const { peopleInRoom } = this.args;
+
+    if (!peopleInRoom) {
+      return 0;
+    }
+
+    return peopleInRoom.length;
+  }
 }

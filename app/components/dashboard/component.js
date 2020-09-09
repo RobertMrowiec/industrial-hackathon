@@ -1,8 +1,10 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { countBy } from "lodash";
+import { countBy, groupBy } from "lodash";
 import { inject as service } from "@ember/service";
 import { TrackedObject } from "tracked-built-ins";
+import { action } from "@ember/object";
+
 export default class DashboardComponent extends Component {
   @service socket;
 
@@ -25,11 +27,11 @@ export default class DashboardComponent extends Component {
     this.channelConnection.on("room_transition", (data) => {
       const { origin_room: from, destination_room: to, user_id } = data;
 
-      const currentUser = this.peopleById[user_id];
+      const currentUser = new TrackedObject({ ...this.peopleById[user_id] });
 
       if (currentUser) {
-        currentUser[from] = from;
-        currentUser[to] = to;
+        currentUser.from = from;
+        currentUser.to = to;
 
         this.peopleById = new TrackedObject({
           ...this.peopleById,
@@ -55,9 +57,30 @@ export default class DashboardComponent extends Component {
   @tracked peopleById = {};
 
   @tracked rooms = [
-    { top: "0", left: "0", right: "50%", bottom: "50%", id: "room-1" },
-    { top: "50%", left: "0", right: "50%", bottom: "0", id: "room-2" },
-    { top: "0", left: "50%", right: "0", bottom: "0", id: "room-3" },
+    {
+      top: "0",
+      left: "0",
+      right: "50%",
+      bottom: "50%",
+      id: "2",
+      name: "Hala Główna",
+    },
+    {
+      top: "50%",
+      left: "0",
+      right: "50%",
+      bottom: "0",
+      id: "3",
+      name: "Hala Produkcyjna",
+    },
+    {
+      top: "0",
+      left: "50%",
+      right: "0",
+      bottom: "0",
+      id: "4",
+      name: "Pokój Innowacyjny",
+    },
   ];
 
   get roomStats() {
@@ -66,5 +89,9 @@ export default class DashboardComponent extends Component {
 
   get people() {
     return Object.values(this.peopleById);
+  }
+
+  get peopleByRoomId() {
+    return groupBy(this.people, "to");
   }
 }

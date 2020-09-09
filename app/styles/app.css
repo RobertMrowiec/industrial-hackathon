@@ -28,3 +28,7 @@ body {
 .room:hover {
   background-color: rgba(215, 159, 26, 0.3);
 }
+
+.room-pill {
+  min-width: 10rem;
+}
