@@ -16,6 +16,10 @@ body {
   height: calc(100vh - 80px);
 }
 
+.building-plan {
+  height: calc(100vh - 200px);
+}
+
 .room {
   position: absolute;
   z-index: 1000;
