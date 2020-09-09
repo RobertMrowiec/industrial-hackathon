@@ -12,5 +12,15 @@ Router.map(function() {
 
   this.route('authenticated', function() {
     this.route('dashboard');
+
+    this.route('rooms', function() {
+      this.route('new');
+    });
+
+    this.route('users', function() {
+      this.route('new');
+    });
+
+    this.route('settings');
   });
 });
