@@ -16,6 +16,10 @@ body {
   height: calc(100vh - 80px);
 }
 
+.building-plan {
+  height: calc(100vh - 200px);
+}
+
 .room {
   position: absolute;
   z-index: 1000;
@@ -23,4 +27,8 @@ body {
 
 .room:hover {
   background-color: rgba(215, 159, 26, 0.3);
+}
+
+.room-pill {
+  min-width: 10rem;
 }

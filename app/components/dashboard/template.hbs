@@ -3,10 +3,10 @@
     <div class="flex-1 w-full">
       <div class="p-12">
         <div class="relative">
-          <img class="w-full rounded-lg shadow-xl" src="/site-plan.jpg" alt="Site plan">
+          <img class="w-full rounded-lg shadow-xl building-plan" src="/site-plan.jpg" alt="Site plan">
 
           {{#each rooms as |room|}}
-            <Dashboard::Room @room={{room}} />
+            <Dashboard::Room @room={{room}} @peopleInRoom={{get this.peopleByRoomId room.id}} />
           {{/each}}
         </div>
       </div>

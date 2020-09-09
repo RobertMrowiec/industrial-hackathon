@@ -1,5 +1,13 @@
-<div style={{elementStyle}} class="room flex items-center justify-center">
-  <div class="p-3 bg-yellow-500 rounded-lg shadow-lg">
-    {{@room.id}}
+<div style={{this.elementStyle}} class="room flex items-center justify-center">
+  <div class="p-3 bg-yellow-500 rounded-lg shadow-lg flex flex-col items-center justify-center room-pill">
+    <div class="font-bold">{{@room.name}}</div>
+
+    <div class="text-gray-700">
+      {{#if (eq this.countPeopleInRoom 1)}}
+        {{this.countPeopleInRoom}} pracownik
+      {{else}}
+        {{this.countPeopleInRoom}} pracowników
+      {{/if}}
+    </div>
   </div>
 </div>
