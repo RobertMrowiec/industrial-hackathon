@@ -10,6 +10,10 @@ export default class DashboardSidebarPersonComponent extends Component {
   openViolationModal() {
     const { person } = this.args;
 
+    if (!person.violatedRule) {
+      return;
+    }
+
     const violationData = {
       person,
       roomNameForPerson: this.roomNameForPerson,

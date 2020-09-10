@@ -1,23 +1,27 @@
 <div class="shadow-sm border-b p-4 bg-white {{if @person.violatedRule "bg-red-200"}} animate__animated animate__fadeIn">
-  <div class="flex items-center justify-between">
-    <div class="avatar">
+  <div class="flex items-center" {{on "click" this.openViolationModal}}>
+    <div class="avatar mr-4">
       <img src={{@person.avatar_url}} class="w-8 rounded-full">
     </div>
+    
+    <div class="flex flex-col">
+      <div class="flex items-center justify-stretch">
+        <div class="">{{@person.first_name}} {{@person.last_name}}</div>
 
-    <div class="">{{@person.first_name}} {{@person.last_name}}</div>
-
-    {{#if @person.violatedRule}}
-      <div class="cursor-pointer" {{on "click" this.openViolationModal}}>
-        {{#if (eq @person.violatedRule "no_helmet")}}
-          ⛑
-        {{else if (eq @person.violatedRule "no_temperature_to_high")}}
-          🌡
-        {{else if (eq @person.violatedRule "no_glasses")}}
-          👓
+        {{#if @person.violatedRule}}
+          <div class="cursor-pointer">
+            {{#if (eq @person.violatedRule "no_helmet")}}
+              ⛑
+            {{else if (eq @person.violatedRule "no_temperature_to_high")}}
+              🌡
+            {{else if (eq @person.violatedRule "no_glasses")}}
+              👓
+            {{/if}}
+          </div>
         {{/if}}
       </div>
-    {{/if}}
-  </div>
 
-  <div class="text-gray-500 text-sm {{if @person.violatedRule "text-gray-700"}}">{{this.roomNameForPerson}}</div>
+      <div class="text-gray-500 text-sm {{if @person.violatedRule "text-gray-700"}}">{{this.roomNameForPerson}}</div>
+    </div>
+  </div>
 </div>
