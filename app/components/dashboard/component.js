@@ -43,9 +43,9 @@ export default class DashboardComponent extends Component {
       }
 
       const newPerson = {
+        ...currentUser,
         from,
         to,
-        user_id,
       };
 
       this.peopleById = new TrackedObject({
@@ -101,14 +101,13 @@ export default class DashboardComponent extends Component {
   }
 
   async fetchPeople() {
-    return;
     const response = await fetch(
       "https://workvisor-bb.herokuapp.com/api/workers"
     );
 
-    const responseJson = await response.json();
+    const { data } = await response.json();
 
-    debugger;
+    this.peopleById = new TrackedObject({ ...data });
   }
 
   get roomStats() {
