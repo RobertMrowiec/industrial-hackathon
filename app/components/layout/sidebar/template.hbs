@@ -1,25 +1,5 @@
 <div class="sidebar shadow-lg w-64 bg-white mb-auto">
   {{#each @people as |person index|}}
-    <div class="shadow-sm border-b p-4">
-      <div class="flex items-center justify-between">
-        <div class="...">Person {{person.user_id}}</div>
-
-        {{#if person.violatedRule}}
-          <div class="...">
-            Violated: 
-            {{#if (eq person.violatedRule "no_helmet")}}
-              ⛑
-            {{else if (eq person.violatedRule "no_temperature_to_high")}}
-              🌡
-            {{else if (eq person.violatedRule "no_glasses")}}
-              👓
-            {{/if}}
-          </div>
-        {{else}}
-          ✅
-        {{/if}}
-      </div>
-      <div class="text-gray-500 text-sm">Currently in: {{person.to}}</div>
-    </div>
+    <Dashboard::Sidebar::Person @roomsById={{@roomsById}} @person={{person}} @personIndex={{index}} />
   {{/each}}
 </div>

@@ -1,12 +1,20 @@
-<div style={{this.elementStyle}} class="room flex items-center justify-center">
+<div style={{this.elementStyle}} class="room flex flex-col items-center justify-center">
+  <div></div>
+  {{#if (gte this.countPeopleInRoom @room.maxPeopleCapacity)}}
+    <div class="animate__animated p-3 bg-red-500 flex flex-col items-center mb-2 rounded-lg animate__fadeIn">
+      <div class="text-white font-bold">Uwaga! Ponad {{@room.maxPeopleCapacity}} osób w pokoju</div>
+      <div class="text-red-200">Covid-19 - zbyt dużo osób w pomieszczeniu</div>
+    </div>
+  {{/if}}
+
   <div class="p-3 bg-yellow-500 rounded-lg shadow-lg flex flex-col items-center justify-center room-pill">
     <div class="font-bold">{{@room.name}}</div>
 
     <div class="text-gray-700">
       {{#if (eq this.countPeopleInRoom 1)}}
-        {{this.countPeopleInRoom}} pracownik
+        {{this.countPeopleInRoom}} pracownik (max {{@room.maxPeopleCapacity}})
       {{else}}
-        {{this.countPeopleInRoom}} pracowników
+        {{this.countPeopleInRoom}} pracowników (max {{@room.maxPeopleCapacity}})
       {{/if}}
     </div>
   </div>
