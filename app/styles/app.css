@@ -4,6 +4,7 @@
 body {
   @apply bg-gray-300;
   height: 100%;
+  overflow: hidden;
 }
 
 .flex {
@@ -14,6 +15,7 @@ body {
 
 .sidebar {
   height: calc(100vh - 80px);
+  overflow-y: scroll;
 }
 
 .building-plan {
