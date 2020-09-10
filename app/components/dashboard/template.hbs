@@ -5,13 +5,19 @@
         <div class="relative">
           <img class="w-full rounded-lg shadow-xl building-plan" src="/site-plan.jpg" alt="Site plan">
 
-          {{#each rooms as |room|}}
+          {{#each this.rooms as |room|}}
             <Dashboard::Room @room={{room}} @peopleInRoom={{get this.peopleByRoomId room.id}} />
           {{/each}}
         </div>
       </div>
     </div>
 
-    <Layout::Sidebar @people={{this.people}} />
+    <Layout::Sidebar @people={{this.people}} @roomsById={{this.roomsById}} />
   </div>
 </div>
+
+{{#if this.violationModal.violationData}}
+  {{#modal-dialog translucentOverlay=true onClose=(action "closeViolationModal")}}
+    <Dashboard::Sidebar::PersonViolationModal />
+  {{/modal-dialog}}
+{{/if}}
