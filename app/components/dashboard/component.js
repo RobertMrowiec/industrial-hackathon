@@ -31,14 +31,15 @@ export default class DashboardComponent extends Component {
 
     this.channelConnection.on("rule_violation", (data) => {
       const { rule, user_id } = data;
+      const user = this.peopleById[user_id].first_name + ' ' + this.peopleById[user_id].last_name
 
       if (rule === 'no_temperature_to_high')
-        this.notifications.error(`Użytkownik ${user_id} znajdujący się w ${serializedRoom[this.peopleById[user_id].to]} ${seralizedRule[rule]}`, {
+        this.notifications.error(`Użytkownik ${user} znajdujący się w ${serializedRoom[this.peopleById[user_id].to]} ${seralizedRule[rule]}`, {
           autoClear: true,
           clearDuration: 4000
         })
       else if (this.peopleById[user_id].to !== '1')
-        this.notifications.warning(`Użytkownik ${user_id} wszedł do ${serializedRoom[this.peopleById[user_id].to]} ${seralizedRule[rule]}`, {
+        this.notifications.warning(`Użytkownik ${user} wszedł do ${serializedRoom[this.peopleById[user_id].to]} ${seralizedRule[rule]}`, {
           autoClear: true,
           clearDuration: 4000
         })
