@@ -65,7 +65,8 @@
     "edition": "octane"
   },
   "dependencies": {
-    "tailwindcss": "^1.8.4",
-    "postcss-import": "^12.0.1"
+    "ember-cli-notifications": "^6.3.0",
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^1.8.4"
   }
 }

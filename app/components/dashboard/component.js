@@ -7,8 +7,21 @@ import { TrackedObject } from "tracked-built-ins";
 // import { action } from "@ember/object";
 import fetch from "fetch";
 
+const seralizedRule = {
+  'no_helmet': 'bez kasku',
+  'no_glasses': 'bez okularów',
+  'no_temperature_to_high': 'ma za wysoką temperaturę'
+}
+
+const serializedRoom = {
+  '2': 'Hala Główna',
+  '3': 'Hala Produkcyjna',
+  '4': 'Pokój Innowacyjny'
+}
+
 export default class DashboardComponent extends Component {
   @service socket;
+  @service notifications;
   @service violationModal;
 
   constructor() {
@@ -18,6 +31,18 @@ export default class DashboardComponent extends Component {
 
     this.channelConnection.on("rule_violation", (data) => {
       const { rule, user_id } = data;
+      const user = this.peopleById[user_id].first_name + ' ' + this.peopleById[user_id].last_name
+
+      if (rule === 'no_temperature_to_high')
+        this.notifications.error(`Użytkownik ${user} znajdujący się w ${serializedRoom[this.peopleById[user_id].to]} ${seralizedRule[rule]}`, {
+          autoClear: true,
+          clearDuration: 4000
+        })
+      else if (this.peopleById[user_id].to !== '1')
+        this.notifications.warning(`Użytkownik ${user} wszedł do ${serializedRoom[this.peopleById[user_id].to]} ${seralizedRule[rule]}`, {
+          autoClear: true,
+          clearDuration: 4000
+        })
 
       const currentUser = this.peopleById[user_id];
 
