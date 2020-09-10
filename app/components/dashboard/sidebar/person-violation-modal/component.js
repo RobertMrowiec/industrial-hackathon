@@ -21,8 +21,16 @@ export default class DashboardSidebarPersonViolationModalComponent extends Compo
     );
     const { data } = await response.json();
 
-    this.violationResponseData = data[0];
+    const fixedData = data.reduce((acc, cur, index) => {
+      if (index === 0) {
+        return { ...cur, type: [cur.type] };
+      }
 
-    console.log(data[0]);
+      return { ...acc, type: [...acc.type, cur.type] };
+    }, {});
+
+    console.log(fixedData);
+
+    this.violationResponseData = fixedData;
   }
 }

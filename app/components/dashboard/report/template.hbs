@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each this.violations as |violation|}}
+      {{#each this.type as |violation|}}
         <Dashboard::Report::Violation @violation={{violation}} @person={{get this.peopleById violation.user_id}} />
       {{/each}}
     </tbody>
