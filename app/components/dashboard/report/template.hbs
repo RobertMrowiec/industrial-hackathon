@@ -9,18 +9,20 @@
     <select><option selected>ostatnie 30 minut</option></select>
   </p>
 
-  <table class="table-auto w-full mt-8 bg-white rounded-lg">
-    <thead>
-      <tr>
-        <th class="w-1/2 px-4 py-2">Imię i nazwisko</th>
-        <th class="w-1/4 px-4 py-2">Naruszenia</th>
-        <th class="w-1/4 px-4 py-2">Kiedy</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each this.type as |violation|}}
-        <Dashboard::Report::Violation @violation={{violation}} @person={{get this.peopleById violation.user_id}} />
-      {{/each}}
-    </tbody>
-  </table>
+  <div class="report relative">
+    <table class="table-auto w-full mt-8 bg-white rounded-lg">
+      <thead>
+        <tr>
+          <th class="w-1/2 px-4 py-2">Imię i nazwisko</th>
+          <th class="w-1/4 px-4 py-2">Naruszenia</th>
+          <th class="w-1/4 px-4 py-2">Kiedy</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.violations as |violation|}}
+          <Dashboard::Report::Violation @violation={{violation}} @person={{get this.peopleById violation.user_id}} />
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </div>

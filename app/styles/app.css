@@ -56,3 +56,8 @@ body {
   width: 100%;
   height: 100%;
 }
+
+.report {
+  max-height: 1000px;
+  overflow-y: scroll;
+}

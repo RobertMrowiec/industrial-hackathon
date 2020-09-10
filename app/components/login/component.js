@@ -13,6 +13,8 @@ export default class LoginComponent extends Component {
   login(event) {
     event.preventDefault();
 
+    // Login credentials simplified for Jury
+
     const correctCredentials =
       this.userEmail === "hackathon@selleo.com" &&
       this.userPassword === "winners";
