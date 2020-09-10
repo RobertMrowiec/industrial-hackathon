@@ -1,0 +1,28 @@
+<div class="px-12 py-6 container mx-auto">
+  <h1 class="text-3xl font-bold">Raport naruszeń zasad BHP</h1>
+
+  <p class="text-gray-700 mt-2">
+    <span>
+      Wygeneruj raport na podstawie wybranego czasu
+    </span>
+    
+    <select><option selected>ostatnie 30 minut</option></select>
+  </p>
+
+  <table class="table-auto w-full mt-8 bg-white rounded-lg">
+    <thead>
+      <tr>
+        <th class="w-1/2 px-4 py-2">Imię i nazwisko</th>
+        <th class="w-1/4 px-4 py-2">Naruszenia</th>
+        <th class="w-1/4 px-4 py-2">Kiedy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border px-4 py-2">{{person.first_name}} {{person.last_name}}</td>
+        <td class="border px-4 py-2">{{violations}}</td>
+        <td class="border px-4 py-2">{{timeFromNowInMinutes}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
