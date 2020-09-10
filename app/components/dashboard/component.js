@@ -8,16 +8,16 @@ import { TrackedObject } from "tracked-built-ins";
 import fetch from "fetch";
 
 const seralizedRule = {
-  'no_helmet': 'bez kasku',
-  'no_glasses': 'bez okularów',
-  'no_temperature_to_high': 'ma za wysoką temperaturę'
-}
+  no_helmet: "bez kasku",
+  no_glasses: "bez okularów",
+  no_temperature_to_high: "ma za wysoką temperaturę",
+};
 
 const serializedRoom = {
-  '2': 'Hala Główna',
-  '3': 'Hala Produkcyjna',
-  '4': 'Pokój Innowacyjny'
-}
+  2: "Hala Główna",
+  3: "Hala Produkcyjna",
+  4: "Pokój Innowacyjny",
+};
 
 export default class DashboardComponent extends Component {
   @service socket;
@@ -31,18 +31,31 @@ export default class DashboardComponent extends Component {
 
     this.channelConnection.on("rule_violation", (data) => {
       const { rule, user_id } = data;
-      const user = this.peopleById[user_id].first_name + ' ' + this.peopleById[user_id].last_name
+      const user =
+        this.peopleById[user_id].first_name +
+        " " +
+        this.peopleById[user_id].last_name;
 
-      if (rule === 'no_temperature_to_high')
-        this.notifications.error(`Użytkownik ${user} znajdujący się w ${serializedRoom[this.peopleById[user_id].to]} ${seralizedRule[rule]}`, {
-          autoClear: true,
-          clearDuration: 4000
-        })
-      else if (this.peopleById[user_id].to !== '1')
-        this.notifications.warning(`Użytkownik ${user} wszedł do ${serializedRoom[this.peopleById[user_id].to]} ${seralizedRule[rule]}`, {
-          autoClear: true,
-          clearDuration: 4000
-        })
+      if (rule === "no_temperature_to_high")
+        this.notifications.error(
+          `Użytkownik ${user} znajdujący się w ${
+            serializedRoom[this.peopleById[user_id].to]
+          } ${seralizedRule[rule]}`,
+          {
+            autoClear: true,
+            clearDuration: 4000,
+          }
+        );
+      else if (this.peopleById[user_id].to !== "1")
+        this.notifications.warning(
+          `Użytkownik ${user} wszedł do ${
+            serializedRoom[this.peopleById[user_id].to]
+          } ${seralizedRule[rule]}`,
+          {
+            autoClear: true,
+            clearDuration: 4000,
+          }
+        );
 
       const currentUser = this.peopleById[user_id];
 
@@ -50,6 +63,14 @@ export default class DashboardComponent extends Component {
         ...this.peopleById,
         [user_id]: { ...currentUser, violatedRule: rule },
       });
+
+      const violationObject = {
+        user_id,
+        timestamp: Date.now(),
+        rule,
+      };
+
+      this.saveViolation(violationObject);
     });
 
     this.channelConnection.on("room_transition", (data) => {
@@ -123,6 +144,18 @@ export default class DashboardComponent extends Component {
   @action
   closeViolationModal() {
     this.violationModal.closeModal();
+  }
+
+  saveViolation(violationObject) {
+    const currentViolations = localStorage.getItem("violations");
+
+    if (!currentViolations) {
+      localStorage.setItem("violations", JSON.stringify([violationObject]));
+    }
+
+    const violations = [...JSON.parse(currentViolations), violationObject];
+
+    localStorage.setItem("violations", JSON.stringify(violations));
   }
 
   async fetchPeople() {

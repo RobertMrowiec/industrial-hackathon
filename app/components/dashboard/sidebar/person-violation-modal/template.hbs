@@ -1,15 +1,27 @@
-<div class="violationModal">
-  <div class="video_wrapper">
+<div class="violationModal p-6">
+  <div class="video_wrapper rounded-lg shadow-lg overflow-hidden">
     <iframe src={{this.violationResponseData.video_url}} frameborder="0" class="video_iframe"></iframe>
   </div>
 
-  <h1>
-    {{this.violationModal.violationData.person.to}}
-  </h1>
+  <p class="flex mt-6 items-center">
+    <img
+      src={{this.violationModal.violationData.person.avatar_url}}
+      alt={{this.violationModal.violationData.person.first_name}}
+      height="32"
+      width="32"
+      class="mr-2 rounded-full"
+    />
+
+    <span class="font-bold">
+      {{this.violationModal.violationData.person.first_name}} - {{this.violationModal.violationData.person.last_name}}
+    </span>
+  </p>
+
+  <p class="mt-6 text-gray-700">Naruszone zasady BHP:</p>
 
   <div class="flex">
-    <div>v1</div>
-    <div>v2</div>
-    <div>v3</div>
+    <div class="py-2 px-4 bg-yellow-500 mr-2 mt-2 text-sm rounded-full shadow-lg">
+      <span>{{violation-for-rule this.violationModal.violationData.person.violatedRule}}</span>
+    </div>
   </div>
 </div>
