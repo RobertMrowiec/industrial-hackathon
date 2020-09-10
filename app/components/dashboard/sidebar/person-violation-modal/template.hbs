@@ -17,11 +17,13 @@
     </span>
   </p>
 
-  <p class="mt-6 text-gray-700">Naruszone zasady BHP:</p>
+  <p class="mt-6 text-gray-700 flex items-center">
+    <span>Naruszone zasady BHP:</span>
 
-  <div class="flex">
-    <div class="py-2 px-4 bg-yellow-500 mr-2 mt-2 text-sm rounded-full shadow-lg">
-      <span>{{violation-for-rule this.violationModal.violationData.person.violatedRule}}</span>
-    </div>
-  </div>
+    {{#each this.violationResponseData.type as |value|}}
+      <div class="py-2 px-4 bg-yellow-500 ml-2 text-sm rounded-full shadow-lg">
+        <span class="font-bold text-gray-900">{{violation-for-rule value}}</span>
+      </div>
+    {{/each}}
+  </p>
 </div>
