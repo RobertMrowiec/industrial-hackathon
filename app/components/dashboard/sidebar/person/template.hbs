@@ -1,6 +1,10 @@
 <div class="shadow-sm border-b p-4 bg-white {{if @person.violatedRule "bg-red-200"}} animate__animated animate__fadeIn">
   <div class="flex items-center justify-between">
-    <div class="...">{{@person.first_name}} {{@person.last_name}}</div>
+    <div class="avatar">
+      <img src={{@person.avatar_url}} class="w-8 rounded-full">
+    </div>
+
+    <div class="">{{@person.first_name}} {{@person.last_name}}</div>
 
     {{#if @person.violatedRule}}
       <div class="cursor-pointer" {{on "click" this.openViolationModal}}>
