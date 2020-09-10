@@ -18,11 +18,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="border px-4 py-2">{{person.first_name}} {{person.last_name}}</td>
-        <td class="border px-4 py-2">{{violations}}</td>
-        <td class="border px-4 py-2">{{timeFromNowInMinutes}}</td>
-      </tr>
+      {{#each this.violations as |violation|}}
+        <Dashboard::Report::Violation @violation={{violation}} @person={{get this.peopleById violation.user_id}} />
+      {{/each}}
     </tbody>
   </table>
 </div>
